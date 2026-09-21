@@ -1,0 +1,84 @@
+channel_label: "Слово Акробата"
+channel_handle: "@slovoacrobata"
+
+# Фраза «зачем подписываться» — в описание каждого шортса.
+# Пайплайн перемешивает список и выдаёт новую, не повторяя предыдущую подряд.
+subscribe_why:
+  - "Новые ролики каждую неделю на этом канале."
+  - "Новые программы постоянно на нашем канале."
+  - "Каждую неделю новые моменты акро WOW!"
+  - "Регулярно новые пары, турниры и элементы только на нашем канале!"
+  - "Только здесь новые ролики выходят постоянно."
+  - "Следующие выступления — каждую неделю на нашем канале."
+  - "Новые шортсы каждую неделю, без пауз."
+  - "Не пропусти"
+
+# Длина готового шортса
+target_min_sec: 30
+target_max_sec: 50
+
+# Три вида упражнений FIG acro — не путать при нарезке
+# tempo — динамическое: сальто, выбросы, винты, полёты
+# combined — комбинированное: в шортсе и баланс (стойки/пирамиды), и темп
+# balance — балансовое: стойки, пирамиды, равновесия (дорожка шагов 2–3 сек)
+routine_types:
+  tempo:
+    connectors: none
+  combined:
+    connectors: optional
+  balance:
+    connectors: dance_steps
+    connector_max_sec: 3.5
+    note: "Между элементами можно вставить короткую дорожку шагов. Не в этом ролике Айсиной — на следующие."
+
+# Нарезка хайлайтов
+analyze_fps: 8
+analyze_width: 320
+clip_pre_sec: 1.2
+clip_post_sec: 5.5
+clip_min_sec: 3.5
+clip_max_sec: 8.0
+merge_gap_sec: 0.7
+
+# Картинка на выходе
+output_width: 1080
+output_height: 1920
+output_fps: 30
+
+# Титры (безопасная зона YouTube Shorts)
+hook_seconds: 2.6
+names_seconds: 6.0
+overlay:
+  hook_size: 118
+  names_size: 52
+  event_size: 52
+  event_gap: 16
+  cta_seconds: 3.8
+  cta_size: 46
+  channel_size: 28
+  show_channel: false
+  names_uppercase: true
+  hook_color: "0xFFD60A"
+  bar_height: 10
+  plate_y: 228
+  plate_h: 150
+  plate_margin: 40
+  plate_opacity: 0.72
+  hook_y: 108
+  names_y: 244
+  font_hook: "C:\\Windows\\Fonts\\impact.ttf"
+  font_names: "C:\\Windows\\Fonts\\NotoSans-CondensedBold.ttf"
+  font_event: "C:\\Windows\\Fonts\\NotoSans-CondensedBold.ttf"
+
+# Музыка Kie AI — без слов, чтобы не пересекаться с музыкой турнира
+kie:
+  model: "V4_5"
+  instrumental: true
+  style: "cinematic sports trailer, epic percussion, no vocals, tense build, punchy hits, stadium energy"
+  style_tempo: "cinematic sports trailer, epic percussion, no vocals, tense build, punchy hits, stadium energy"
+  style_balance: "cinematic, elegant tension, sparse percussion, no vocals, slow atmospheric build, not dance pop"
+  style_combined: "cinematic sports trailer, powerful drums then hold, no vocals, tension and release"
+  title: "Acro Highlight"
+  negative_tags: "lyrics, vocals, singing, rap, speech, choir"
+  poll_seconds: 12
+  timeout_seconds: 480

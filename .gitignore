@@ -1,0 +1,14 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+work/
+inbox/*
+!inbox/.gitkeep
+outbox/*
+!outbox/.gitkeep
+preview-frames/
+music/*.mp3
+music/*.wav
+music/*.m4a
+!music/.gitkeep

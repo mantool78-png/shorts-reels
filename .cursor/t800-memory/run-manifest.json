@@ -1,0 +1,18 @@
+{
+  "slug": "acro-short-ending",
+  "started": "2026-09-20",
+  "profile": "workspace-cursor",
+  "memory_path": ".cursor/t800-memory",
+  "plugin_root": null,
+  "artifact_surface": "cursor-workspace",
+  "steps": [
+    {"agent": "t-800-scout", "id": "b49d33b2-57b6-402c-881d-392d0a4d3e1a", "status": "done"},
+    {"agent": "t-800-research-lead", "id": "f0b4e47d-ac70-41b3-aab7-a7a75fd589aa", "status": "done"},
+    {"agent": "t-800-brain-lead", "id": "b1c6638a-f269-48f3-9ba9-ff0540bf0249", "status": "done"},
+    {"agent": "t-800-factory", "id": "bffe416f-4588-41a3-9f16-1a4fe08ce6b6", "status": "done"},
+    {"agent": "t-800-factory-architect", "id": "318aa402-fce2-4f26-8547-7d112536bcd7", "status": "done"},
+    {"agent": "t-800-factory-builder", "id": "67d1855a-3627-415f-9ede-889d0cf60206", "status": "done"},
+    {"agent": "t-800-factory-integrator", "id": "358e1a4b-5a72-45ba-b7b3-6a3f6718c843", "status": "done"},
+    {"agent": "t-800-factory-auditor", "id": "973403ef-f476-4082-9c8d-39df2c80b19b", "status": "done", "verdict": "PASS"}
+  ]
+}

@@ -1,0 +1,93 @@
+status: ok
+stage: architect
+slug: acro-short-ending
+artifact_surface: cursor-workspace
+profile: workspace-cursor
+plugin_root: null
+registry_patch: null
+browser_capability: forbidden
+browser_notes: >-
+  Правило про нарезку шортса, не про UI. Не вставлять секцию Browser,
+  не учить browser_*/cursor-ide-browser/Task(Browser). Bans browser в тело
+  правила НЕ добавлять (лимит 25 строк). Auditor FAIL, если .mdc учит browser.
+architect_agent_id: 318aa402-fce2-4f26-8547-7d112536bcd7
+
+spec:
+  type: rule
+  name: wow-acro-shorts-bookends
+  artifact_path: .cursor/rules/wow-acro-shorts-bookends.mdc
+  create_rules_dir: true
+  template: templates/rule.mdc.template
+  language: ru
+  max_body_lines: 25
+  calls: []
+  calledBy: [t-800-factory]
+  companions:
+    command: null
+    rule: .cursor/rules/wow-acro-shorts-bookends.mdc
+    skill: .cursor/skills/wow-acro-shorts/SKILL.md
+    qa_checklist: .cursor/skills/wow-acro-shorts/references/qa-checklist.md
+    hook: null
+    agent: null
+  frontmatter:
+    description: "Рамки шортса: первый клип — хук, последний — фиксация 2–3 с"
+    alwaysApply: true
+    omit_fields: [globs]
+  body:
+    analog: "Как рамка фото — сначала ударный кадр, в конце замереть в позе."
+    pointer: "Как нарезать — skill wow-acro-shorts и references/qa-checklist.md."
+    must:
+      - "Первый клип = хук. Для tempo/combined — выброс/сальто, не спокойный заход."
+      - "Последний клип = фиксация композиции 2–3 с (поза / салют судьям)."
+      - "Эталон принятый живьём: 1:43.5-1:46 (~2.5 с) на inbox/IMG_6832.MOV — салют, не стойка перед прыжком."
+    never:
+      - "Не заканчивать статикой перед прыжком (зритель ждёт сальто/винт, а ролик уже кончился)."
+      - "Не заканчивать полётом, кувырком, стадией перемещения."
+      - "Не копировать в это правило CLI, ffmpeg, оверлей, Kie, золотые --clips."
+
+  builder_file_wow_acro_shorts_bookends_mdc: |
+    ---
+    description: "Рамки шортса: первый клип — хук, последний — фиксация 2–3 с"
+    alwaysApply: true
+    ---
+
+    # Рамки шортса
+
+    Как рамка фото — сначала ударный кадр, в конце замереть в позе.
+
+    ## MUST
+    - Первый клип = хук. Для tempo/combined — выброс/сальто, не спокойный заход.
+    - Последний клип = фиксация композиции 2–3 с (поза / салют судьям).
+    - Эталон принятый живьём: 1:43.5-1:46 (~2.5 с) на inbox/IMG_6832.MOV — салют, не стойка перед прыжком.
+
+    ## NEVER
+    - Не заканчивать статикой перед прыжком (зритель ждёт сальто/винт, а ролик уже кончился).
+    - Не заканчивать полётом, кувырком, стадией перемещения.
+    - Не копировать в это правило CLI, ffmpeg, оверлей, Kie, золотые --clips.
+
+    Как нарезать — skill wow-acro-shorts и references/qa-checklist.md.
+
+  companion_patches:
+    - file: .cursor/skills/wow-acro-shorts/SKILL.md
+      action: replace_once
+      old: "3. **Таймкоды тренера.** Точка в чате `1.02` = минута 1, секунда 02 → в CLI пиши `1:02`, не `1.02` (иначе это ~1 секунда). Ручные `--clips` важнее автоанализа. Первый клип = хук. Для combined/tempo хук — выброс/сальто, не спокойный заход."
+      new: "3. **Таймкоды тренера.** Точка в чате `1.02` = минута 1, секунда 02 → в CLI пиши `1:02`, не `1.02` (иначе это ~1 секунда). Ручные `--clips` важнее автоанализа. Первый клип = хук. Для combined/tempo хук — выброс/сальто, не спокойный заход. Последний клип = фиксация композиции 2–3 с (поза / салют судьям)."
+    - file: .cursor/skills/wow-acro-shorts/SKILL.md
+      action: replace_once
+      old: "- Не создавать агентов, commands, hooks, rules «ради шортсов»."
+      new: "- Не создавать агентов, commands, hooks и user rules «ради шортсов». Одно project-правило `.cursor/rules/wow-acro-shorts-bookends.mdc` (рамки: хук + фиксация) — можно; другие rules не плодить."
+    - file: .cursor/skills/wow-acro-shorts/references/qa-checklist.md
+      action: insert_after
+      after: "- [ ] Первый кусок — хук (для tempo/combined — выброс/сальто)"
+      insert: "- [ ] Последний кусок — фиксация 2–3 с (поза / салют судьям), не статика перед прыжком и не полёт"
+
+do_not:
+  - "не ~/.cursor/rules, User Rules, Team Rules, AGENTS.md"
+  - "не agents / commands / hooks"
+  - "не acro-routine-types.mdc и не overwrite acro-routine-types.yaml"
+  - "не CLI/ffmpeg/overlay/Kie/золотые --clips в теле правила"
+  - "не полный rewrite SKILL.md"
+  - "не plugin registry"
+  - "не skip auditor"
+
+open_questions: []

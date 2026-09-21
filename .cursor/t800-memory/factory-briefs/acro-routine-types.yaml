@@ -1,0 +1,40 @@
+slug: acro-routine-types
+artifact_path: .cursor/rules/acro-routine-types.mdc
+alwaysApply: true
+no_globs: true
+recommended_artifact: rule
+artifact_surface: cursor-workspace
+target_context:
+  workspace_root: "C:\\Users\\fedor\\OneDrive\\Рабочий стол\\Рилсы Шортсы"
+  plugin_root: null
+  memory_path: "C:\\Users\\fedor\\OneDrive\\Рабочий стол\\Рилсы Шортсы\\.cursor\\t800-memory"
+  profile: workspace-cursor
+body_outline:
+  - "Зачем: в каждом чате различать 3 типа программы; CLI --style tempo|balance|combined уже есть."
+  - "Балансовое (balance): стойки, пирамиды, равновесия; между элементами можно 2–3 сек дорожки шагов."
+  - "Динамическое/темповое (tempo): выбросы, сальто, винты, полёты."
+  - "Комбинированное (combined): баланс + темп в одном упражнении; шортс обязан содержать ОБА."
+  - "Запрет: нельзя нарезать комби как чистое темповое (не выкидывать баланс)."
+  - "Нарезку, музыку и тексты сверять с выбранным --style."
+do_not:
+  - "не создавать agents / skills / commands / hooks"
+  - "не писать user/team rules и AGENTS.md ради этой темы"
+  - "не ставить globs при alwaysApply: true"
+  - "не раздувать правило документацией Cursor"
+  - "не писать .md вместо .mdc"
+scout_report:
+  agent_id: 2d541e0c-c34d-4376-8868-b71862ddad57
+  status: stale
+  block_factory: false
+research_brief:
+  agent_id: 42187ee0-11dc-4844-be06-49ae98e59ee6
+  recommended_factory: true
+  rule_format_ok: true
+  breaking_changes: []
+brain_lead:
+  agent_id: 403bd715-6bb0-432e-b456-caf386b847b8
+constraints:
+  - "Frontmatter: alwaysApply: true; поля globs нет"
+  - "description можно оставить для UI Customize, на активацию не влияет"
+  - "Тело на русском, коротко; формулировки пользователя обязательны"
+  - "Integrator: только .cursor/ в проекте, без plugin registry"

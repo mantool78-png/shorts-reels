@@ -1,0 +1,52 @@
+slug: acro-short-ending
+artifact_type: rule
+artifact_path: .cursor/rules/wow-acro-shorts-bookends.mdc
+alwaysApply: true
+no_globs: true
+recommended_artifact: rule
+artifact_surface: cursor-workspace
+target_context:
+  workspace_root: "C:\\Users\\fedor\\OneDrive\\Рабочий стол\\Рилсы Шортсы"
+  plugin_root: null
+  memory_path: "C:\\Users\\fedor\\OneDrive\\Рабочий стол\\Рилсы Шортсы\\.cursor\\t800-memory"
+  profile: workspace-cursor
+goal: "Project rule: first clip = hook (throw/salto), last clip = 2–3s composition fixation."
+frontmatter:
+  description: "Рамки шортса: первый клип — хук, последний — фиксация 2–3 с"
+  alwaysApply: true
+body_outline:
+  language: ru
+  max_body_lines: 25
+  analog: "Как рамка фото: сначала ударный кадр, в конце замереть в позе."
+  must:
+    - "Первый клип = хук. Для tempo/combined — выброс/сальто, не спокойный заход."
+    - "Последний клип = фиксация композиции 2–3 с (поза / салют судьям)."
+    - "Эталон: 1:43.5–1:46 (~2.5 с) на inbox/IMG_6832.MOV — салют."
+  never:
+    - "Не заканчивать статикой перед прыжком."
+    - "Не заканчивать полётом, кувырком, в воздухе."
+    - "Не копировать в правило CLI, ffmpeg, оверлей, Kie, золотые --clips."
+  pointer: "Как нарезать — skill wow-acro-shorts и references/qa-checklist.md."
+companions:
+  skill: true
+  skill_path: .cursor/skills/wow-acro-shorts/SKILL.md
+  qa_checklist: .cursor/skills/wow-acro-shorts/references/qa-checklist.md
+do_not:
+  - "не user/team rules и не ~/.cursor/rules"
+  - "не AGENTS.md"
+  - "не создавать agents / commands / hooks"
+  - "не acro-routine-types.mdc и не перезаписывать acro-routine-types.yaml"
+  - "не дублировать overlay/CLI/pipeline"
+scout_report:
+  agent_id: b49d33b2-57b6-402c-881d-392d0a4d3e1a
+  status: stale
+  block_factory: false
+research_brief:
+  agent_id: f0b4e47d-ac70-41b3-aab7-a7a75fd589aa
+  recommended_factory: true
+brain_lead:
+  agent_id: b1c6638a-f269-48f3-9ba9-ff0540bf0249
+constraints:
+  - "Frontmatter alwaysApply true; поля globs нет"
+  - "Тело на русском, коротко; формулировки пользователя обязательны"
+  - "Integrator: только .cursor/ в проекте, без plugin registry"
