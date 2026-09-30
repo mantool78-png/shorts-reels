@@ -7,6 +7,18 @@ from pipeline.media import crop_scale_filter
 from pipeline.textutil import ff_font, ff_fontfile, ff_text, overlay_name_lines, split_cta_lines
 
 
+def _board_zoom_filter(out_w: int, out_h: int, fps: int) -> str:
+    """Убрать красное табло трансляции и чуть укрупнить ковёр. Спортсмены остаются."""
+    return (
+        "[0:v]split[full][top];"
+        "[top]crop=iw:640:0:0,format=rgba,colorkey=0xC80000:0.34:0.02[keyed];"
+        "color=c=0x101010:s=720x640,format=rgba[bg];"
+        "[bg][keyed]overlay=format=auto[top2];"
+        "[full][top2]overlay=0:0,crop=640:1120:40:140,"
+        f"scale={out_w}:{out_h}:flags=lanczos,setsar=1,fps={fps},format=yuv420p[v]"
+    )
+
+
 def _cut_clip(
     source: Path,
     dest: Path,
@@ -18,8 +30,9 @@ def _cut_clip(
     out_w: int,
     out_h: int,
     fps: int,
+    dim_board: bool = False,
+    crop: dict | None = None,
 ) -> None:
-    vf = crop_scale_filter(src_w, src_h, cx_ratio, out_w, out_h) + f",fps={fps},format=yuv420p"
     dest.parent.mkdir(parents=True, exist_ok=True)
     cmd = [
         ffmpeg_exe(),
@@ -31,8 +44,33 @@ def _cut_clip(
         "-to",
         f"{end:.3f}",
         "-an",
-        "-vf",
-        vf,
+    ]
+    if crop and crop.get("pad"):
+        cw, ch = int(crop["w"]), int(crop["h"])
+        cx, cy = int(crop["x"]), int(crop["y"])
+        fc = (
+            f"[0:v]split[bg][fg];"
+            f"[bg]crop={cw}:{ch}:{cx}:{cy},"
+            f"scale={out_w}:{out_h}:force_original_aspect_ratio=increase,"
+            f"crop={out_w}:{out_h},boxblur=18:1[bgb];"
+            f"[fg]crop={cw}:{ch}:{cx}:{cy},"
+            f"scale={out_w}:-2:flags=lanczos,setsar=1[fgf];"
+            f"[bgb][fgf]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2,"
+            f"fps={fps},format=yuv420p[v]"
+        )
+        cmd += ["-filter_complex", fc, "-map", "[v]"]
+    elif crop:
+        vf = (
+            f"crop={int(crop['w'])}:{int(crop['h'])}:{int(crop['x'])}:{int(crop['y'])},"
+            f"scale={out_w}:{out_h}:flags=lanczos,setsar=1,fps={fps},format=yuv420p"
+        )
+        cmd += ["-vf", vf]
+    elif dim_board:
+        cmd += ["-filter_complex", _board_zoom_filter(out_w, out_h, fps), "-map", "[v]"]
+    else:
+        vf = crop_scale_filter(src_w, src_h, cx_ratio, out_w, out_h) + f",fps={fps},format=yuv420p"
+        cmd += ["-vf", vf]
+    cmd += [
         "-c:v",
         "libx264",
         "-preset",
@@ -265,6 +303,8 @@ def assemble(source: Path, highlights: dict, job_dir: Path, music: Path | None, 
             out_w,
             out_h,
             fps,
+            dim_board=bool(cfg.get("dim_scoreboard")),
+            crop=clip.get("crop"),
         )
         clip_paths.append(dest)
 

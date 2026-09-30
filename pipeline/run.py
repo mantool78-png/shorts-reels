@@ -88,6 +88,9 @@ def run_job(args: argparse.Namespace) -> Path:
     if style:
         cfg["routine_style"] = style
         print(f"Тип выступления: {STYLE_RU[style]}")
+    if getattr(args, "dim_board", False):
+        cfg["dim_scoreboard"] = True
+        print("Кадр: табло приглушено, спортсмены крупнее")
     source = Path(args.video) if args.video else newest_inbox()
     if source is None or not source.exists():
         raise SystemExit(
@@ -210,6 +213,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("--skip-kie", action="store_true", help="Не вызывать Kie AI")
     p.add_argument("--skip-music", action="store_true", help="Собрать совсем без музыки")
+    p.add_argument(
+        "--dim-board",
+        action="store_true",
+        help="Приглушить красное табло трансляции и укрупнить ковёр",
+    )
     p.add_argument("--self-test", action="store_true", help="Прогон на тестовом ролике")
     return p
 
