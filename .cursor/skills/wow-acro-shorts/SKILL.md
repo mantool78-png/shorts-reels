@@ -7,7 +7,7 @@ description: >-
   tempo/balance/combined cuts, Kie music, or «сделай такой же ролик».
 ---
 
-> ⚠️ С 2026-10-02 для новых роликов действует docs/CLEAN_BASE_SPEC.md. Три звука: `<slug>_orig.mp4`, `<slug>_nomusic.mp4`, `<slug>_kie.mp4` (основной для YouTube, VK и Дзен; трек Kie один раз). Вшитый WOW-оверлей устарел.
+> ⚠️ С 2026-10-02 для новых роликов действует docs/CLEAN_BASE_SPEC.md. Поставка — только `<slug>_kie.mp4` (оригинальный звук убран, один трек Kie, основной для YouTube, VK и Дзен) и `<slug>_facts.json`. `<slug>_orig.mp4` и `<slug>_nomusic.mp4` не делать. Вшитый WOW-оверлей устарел.
 
 # WOW акро-шортсы
 
@@ -32,7 +32,7 @@ description: >-
 .venv/Scripts/python.exe -m pipeline --video "inbox/FILE" --style combined --hook WOW --element "..." --athletes "..." --city "..." --event "..." --clips "..." --music "work/JOB/kie.mp3"
 ```
 
-> С 2026-10-02 для новых роликов `--music` / Kie снова используется: один трек на ролик, файл `<slug>_kie.mp4` (оригинальный звук убран). Рядом обязательны `<slug>_orig.mp4` и `<slug>_nomusic.mp4`. Боты площадок свою музыку не генерируют. См. docs/CLEAN_BASE_SPEC.md.
+> С 2026-10-02 для новых роликов `--music` / Kie используется один раз: файл `<slug>_kie.mp4` (оригинальный звук убран, основной для YouTube, VK и Дзен). Рядом только `<slug>_facts.json`. `<slug>_orig.mp4` и `<slug>_nomusic.mp4` не делать. Боты площадок свою музыку не генерируют. См. docs/CLEAN_BASE_SPEC.md.
 
 `--music` ставь **только** если для того же сырья уже есть `kie.mp3` в `work/`. Иначе не передавай `--music` — пайплайн сам вызовет Kie. Можно `запуск.bat` с теми же флагами.
 5. **Покажи человеку.** Файл `outbox/*.mp4`, из соседнего `.meta.json` поля `youtube_title` и `subscribe_line`. Есть ещё `.html` (таймкоды) и `.json`.
