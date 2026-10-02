@@ -7,6 +7,8 @@ description: >-
   tempo/balance/combined cuts, Kie music, or «сделай такой же ролик».
 ---
 
+> ⚠️ С 2026-10-02 для новых роликов действует docs/CLEAN_BASE_SPEC.md
+
 # WOW акро-шортсы
 
 Проектный skill: сырьё из зала → вертикальный ролик 30–50 сек (9:16) в `outbox/`.
@@ -30,12 +32,16 @@ description: >-
 .venv/Scripts/python.exe -m pipeline --video "inbox/FILE" --style combined --hook WOW --element "..." --athletes "..." --city "..." --event "..." --clips "..." --music "work/JOB/kie.mp3"
 ```
 
+> **Устарело с 2026-10-02** для новых роликов: шаги Kie и флаг `--music` (см. docs/CLEAN_BASE_SPEC.md). Ниже оставлено для старых заданий.
+
 `--music` ставь **только** если для того же сырья уже есть `kie.mp3` в `work/`. Иначе не передавай `--music` — пайплайн сам вызовет Kie. Можно `запуск.bat` с теми же флагами.
 5. **Покажи человеку.** Файл `outbox/*.mp4`, из соседнего `.meta.json` поля `youtube_title` и `subscribe_line`. Есть ещё `.html` (таймкоды) и `.json`.
 6. **Жди ок.** Не публикуй на YouTube без явной просьбы. Не рисуй название канала на кадрах.
 7. **Каденс.** Ориентир: около одного шортса в день.
 
 ## Overlay (золото)
+
+> **Устарело с 2026-10-02** для новых роликов (см. docs/CLEAN_BASE_SPEC.md). Раздел оставлен для старых заданий: вшитый оверлей и музыка Kie новыми роликами не используются.
 
 | Что | Как |
 |-----|-----|
@@ -71,4 +77,4 @@ description: >-
 - Не класть копии пайплайна в `.cursor/skills/`.
 - Не перезаписывать `acro-routine-types.yaml` и правило типов упражнений.
 - Не ставить `disable-model-invocation`, `paths`, `globs` в этот skill.
-- Не создавать агентов, commands, hooks и user rules «ради шортсов». Одно project-правило `.cursor/rules/wow-acro-shorts-bookends.mdc` (рамки: хук + фиксация) — можно; другие rules не плодить.
+- Не создавать агентов, commands, hooks и user rules «ради шортсов». Project-правила `.cursor/rules/wow-acro-shorts-bookends.mdc` (рамки: хук + фиксация) и `.cursor/rules/clean-base-spec.mdc` (чистая основа) — можно; другие rules не плодить.
